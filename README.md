@@ -27,6 +27,23 @@ You can install `helm-c-yasnippet` with the following command.
 (yas-load-directory "<path>/<to>/snippets/")
 ```
 
+## Browsing without a word prefix
+
+By default, `helm-yas-complete` filters snippet names by the word before point
+and replaces that word when inserting a snippet. This filter is separate from
+the visible Helm search input: invoking the command after ordinary text can
+show no candidates even when the search input is empty.
+
+To browse snippets without this word-prefix filter and insert at point without
+replacing preceding text:
+
+```lisp
+(setq helm-yas-use-prefix nil)
+```
+
+The default value is `t`, preserving existing completion behavior. This option
+does not change snippet conditions or active-region handling.
+
 [melpa-link]: https://melpa.org/#/helm-c-yasnippet
 [melpa-stable-link]: https://stable.melpa.org/#/helm-c-yasnippet
 [melpa-badge]: https://melpa.org/packages/helm-c-yasnippet-badge.svg

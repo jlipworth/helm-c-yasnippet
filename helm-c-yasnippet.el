@@ -98,6 +98,15 @@ Default: nil"
   :type 'boolean
   :group 'helm-yasnippet)
 
+(defcustom helm-yas-use-prefix t
+  "Whether to complete the word before point when choosing a snippet.
+When non-nil, that word filters snippet names and is replaced on insertion.
+When nil, do not filter by the preceding word, and insert at point without
+replacing it.  This does not change snippet conditions or active-region
+handling."
+  :type 'boolean
+  :group 'helm-yasnippet)
+
 (defcustom helm-yas-display-key-on-candidate nil
   "if non-nil helm display candidate(snippet name) include key
 ex. [for] for (...) { ... }
@@ -233,7 +242,7 @@ like `yas--current-key'"
         (syntax "w_"))
     (condition-case nil
         (save-excursion
-          (when mark-active
+          (when (or mark-active (not helm-yas-use-prefix))
             (error ""))
           (skip-syntax-backward syntax)
           (setq start (point))
